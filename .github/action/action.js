@@ -108,14 +108,15 @@ async function chooseFromList(list, keywords = []) {
       //copy readme file only
       fs.readdirSync(folder).forEach((file) => {
         if (/readme\.md/i.test(file)) {
-          fs.copyFileSync(
-            path.join(folder, file),
-            path.join(PARENT_FOLDER, file),
-            {
-              recursive: true,
-              overwrite: true,
-            }
-          );
+          try {
+            fs.unlinkSync(path.join(PARENT_FOLDER, file));
+            fs.copyFileSync(
+              path.join(folder, file),
+              path.join(PARENT_FOLDER, file)
+            );
+          } catch (err) {
+            console.log(err);
+          }
         }
       });
 
