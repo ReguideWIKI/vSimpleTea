@@ -6,7 +6,7 @@ on:
 
 jobs:
   schedule-change:
-    name: Schedule Change
+    name: New Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
