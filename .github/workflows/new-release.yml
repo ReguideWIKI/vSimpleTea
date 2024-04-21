@@ -17,4 +17,7 @@ jobs:
 
       - name: Run Code
         if: ${{ !contains(github.event.repository.full_name, 'template') }}
-        run: node ./github/action/release.js --github="${{ secrets.GITHUB_TOKEN }}" --owner="${{ github.repository_owner }}" --repo="${{ github.event.repository.full_name }}" --package="${{ steps.package_name.outputs.PACKAGE_NAME }}" --repourl="${{ github.event.repository.html_url }}"
+        run: |
+          cd .github/action
+          npm ci
+          node ./github/action/release.js --github="${{ secrets.GITHUB_TOKEN }}" --owner="${{ github.repository_owner }}" --repo="${{ github.event.repository.full_name }}" --package="${{ steps.package_name.outputs.PACKAGE_NAME }}" --repourl="${{ github.event.repository.html_url }}"
