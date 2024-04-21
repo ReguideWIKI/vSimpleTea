@@ -48,6 +48,7 @@ jobs:
           npm ci
           node action.js --github="${{ secrets.GITHUB_TOKEN }}" --owner="${{ github.repository_owner }}" --repo="${{ github.event.repository.full_name }}" --package="${{ steps.package_name.outputs.PACKAGE_NAME }}" --repourl="${{ github.event.repository.html_url }}"
           cd ../..
+          rm -rf .github/action/action.js
 
       - name: Set package info
         run: |
