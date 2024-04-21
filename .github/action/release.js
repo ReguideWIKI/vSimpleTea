@@ -37,7 +37,7 @@ async function main() {
 
   while (newVersion == version) {
     const n = random(1, 100);
-    const p = n < 90 ? 2 : n < 98 ? 1 : 0;
+    const p = (n < 90) ? 2 : (n < 98 ? 1 : 0);
 
     spl[p] = parseInt(spl[p], 10) + 1;
 
