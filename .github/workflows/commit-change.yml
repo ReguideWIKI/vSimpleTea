@@ -84,8 +84,11 @@ jobs:
         continue-on-error: true
         run: |
           INSTALL_PACKAGE="${{ vars.PACKAGES || env.PACKAGES || secrets.PACKAGES }}"
-          if [ ! -z "${INSTALL_PACKAGE}" ]; then
-            ${{ env.PACKAGE_MANAGER }} install ${INSTALL_PACKAGE}
+          -- check if npm by
+          if [ "${{ env.PACKAGE_MANAGER }}" == "npm" ]; then
+            npm install ${INSTALL_PACKAGE}
+          else
+            ${{ env.PACKAGE_MANAGER }} add ${INSTALL_PACKAGE}
           fi
         env:
           NODE_OPTIONS: --max_old_space_size=10240
