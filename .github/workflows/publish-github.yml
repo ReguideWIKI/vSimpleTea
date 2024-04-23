@@ -42,6 +42,7 @@ jobs:
       - run: npm pkg set name="@${{ github.repository_owner }}/${{ github.event.repository.name }}"
 
       - name: Reinstall to reflect new name
+        continue-on-error: true
         run: |
           if [ "${{ env.PACKAGE_MANAGER }}" == "npm" ]; then
             npm ci
