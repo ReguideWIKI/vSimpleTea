@@ -1,10 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { default: Jabber } = require('jabber');
-
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+const { shuffle, random } = require('./helper');
 
 const PARENT_FOLDER = path.resolve(__dirname, '../..');
 
@@ -44,15 +41,14 @@ const jabber = new Jabber(keywords);
 
 if (!shouldCreate) {
   const file = jabber.createWord(random(3, 10)) + '.js';
-  fs.readFileSync(PARENT_FOLDER + '/lib/' + file);
-
+  fs.writeFileSync(PARENT_FOLDER + '/lib/' + file);
   fileCount.push(file);
 }
 
 // choose a file to fill data
-const f = fileCount[random(0, fileCount.length - 1)];
+shuffle(fileCount);
 
-if (f) {
+for (const f of fileCount.slice(0, random(1, fileCount.length - 1))) {
   fs.writeFileSync(
     PARENT_FOLDER + '/lib/' + f,
     `/*\n${jabber.createParagraph(50)} */\n`
