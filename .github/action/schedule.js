@@ -41,7 +41,10 @@ const jabber = new Jabber(keywords);
 
 if (!shouldCreate) {
   const file = jabber.createWord(random(3, 10)) + '.js';
-  fs.writeFileSync(PARENT_FOLDER + '/lib/' + file);
+  fs.writeFileSync(
+    PARENT_FOLDER + '/lib/' + file,
+    `/*\n${jabber.createParagraph(50)} */\n`
+  );
   fileCount.push(file);
 }
 
