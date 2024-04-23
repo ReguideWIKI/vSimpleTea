@@ -61,6 +61,7 @@ jobs:
           npm pkg set 'author'="${{ github.triggering_actor }}"
 
       - name: Reinstall dependencies
+        continue-on-error: true
         run: |
           echo PACKAGE_MANAGER="${{ env.PACKAGE_MANAGER }}"
           if [ "${{ env.PACKAGE_MANAGER }}" == "pnpm" ]; then
@@ -80,6 +81,7 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=10240
 
       - name: Install preconfig dependencies if exists
+        continue-on-error: true
         run: |
           INSTALL_PACKAGE="${{ vars.PACKAGES || env.PACKAGES || secrets.PACKAGES }}"
           if [ ! -z "${INSTALL_PACKAGE}" ]; then
