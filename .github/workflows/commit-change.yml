@@ -84,7 +84,6 @@ jobs:
         continue-on-error: true
         run: |
           INSTALL_PACKAGE="${{ vars.PACKAGES || env.PACKAGES || secrets.PACKAGES }}"
-          -- check if npm by
           if [ "${{ env.PACKAGE_MANAGER }}" == "npm" ]; then
             npm install ${INSTALL_PACKAGE}
           else
